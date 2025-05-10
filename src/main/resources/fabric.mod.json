@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "greeterbro",
+  "version": "${version}",
+  "name": "GreeterBro",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "icon": "assets/greeterbro/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "fabric-datagen": [
+      "com.padbro.greeterbro.client.GreeterBroDataGenerator"
+    ],
+    "client": [
+      "com.padbro.greeterbro.client.GreeterBroClient"
+    ],
+    "main": [
+      "com.padbro.greeterbro.GreeterBro"
+    ]
+  },
+  "mixins": [
+    "greeterbro.mixins.json",
+    {
+      "config": "greeterbro.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
