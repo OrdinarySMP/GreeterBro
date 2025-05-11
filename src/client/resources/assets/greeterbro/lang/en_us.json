@@ -1,0 +1,11 @@
+{
+  "text.autoconfig.GreeterBro.option.general": "General",
+  "text.autoconfig.GreeterBro.option.enableGreeterBro": "Enable",
+  "text.autoconfig.GreeterBro.option.enableGreeterBro.@Tooltip": "Enable the auto greeter",
+  "text.autoconfig.GreeterBro.option.greetings": "Greetings",
+  "text.autoconfig.GreeterBro.option.greetings.@Tooltip": "List of words/phrases used to greet",
+  "text.autoconfig.GreeterBro.option.delayRange": "Delay in ticks range for the auto greeting",
+  "text.autoconfig.GreeterBro.option.delayRange.min": "Min",
+  "text.autoconfig.GreeterBro.option.delayRange.max": "Max",
+  "text.autoconfig.GreeterBro.title": "GreeterBro"
+}

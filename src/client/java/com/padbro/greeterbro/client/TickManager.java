@@ -12,18 +12,28 @@ public class TickManager {
 
     public static void onTick() {
         for (ScheduledTask task : tasks) {
-            System.out.println("Ticking task");
-            if (task.remainingTicks <= 0) {
-                System.out.println("Executing task");
+            if (task.remainingTicks <= 0) {;
                 task.run();
-                System.out.println("Task executed");
                 tasks.remove(task);
-                System.out.println("Removing task");
                 return;
             }
-            System.out.println("Decreasing remainingTicks");
             task.remainingTicks--;
-            System.out.println("remainingTicks: " + task.remainingTicks);
+        }
+    }
+
+    public static class ScheduledTask {
+        private int delayInTicks;
+        int remainingTicks;
+        final Runnable task;
+
+        public ScheduledTask(int delayInTicks, Runnable task) {
+            this.delayInTicks = delayInTicks;
+            this.task = task;
+            this.remainingTicks = delayInTicks;
+        }
+
+        public void run() {
+            this.task.run();
         }
     }
 }

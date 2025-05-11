@@ -1,7 +1,9 @@
 package com.padbro.greeterbro.client.mixin;
 
-import com.padbro.greeterbro.client.ScheduledTask;
+import com.padbro.greeterbro.client.GreeterBroClient;
+import com.padbro.greeterbro.client.TickManager.ScheduledTask;
 import com.padbro.greeterbro.client.TickManager;
+import com.padbro.greeterbro.client.config.GreeterBroConfig;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.ChatHud;
 import net.minecraft.client.gui.hud.ChatHudLine;
@@ -14,17 +16,24 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Objects;
+import java.util.Random;
 
 @Mixin(ChatHud.class)
 
 public class ChatMixin {
     @Inject(method = "addMessage(Lnet/minecraft/client/gui/hud/ChatHudLine;)V", at = @At("HEAD"))
     public void onMessage (ChatHudLine message, CallbackInfo ci) {
+        GreeterBroConfig config = GreeterBroClient.config.get();
+
+        if (!config.enableGreeterBro) {
+            return;
+        }
+
         if (isJoinMessage(message) && MinecraftClient.getInstance().player != null) {
-            System.out.println("Join message received" + message.toString());
-            int delayInTicks = (int) (Math.random() * (60 - 20)) + 20;
-            TickManager.scheduleTask(new ScheduledTask(delayInTicks, () -> {
-                MinecraftClient.getInstance().player.networkHandler.sendChatMessage("hello");
+            TickManager.scheduleTask(new ScheduledTask(config.delayRange.getRandomDelay(), () -> {
+                Random rand = new Random();
+                String greeting = config.greetings.get(rand.nextInt(config.greetings.size()));
+                MinecraftClient.getInstance().player.networkHandler.sendChatMessage(greeting);
             }));
         }
     }

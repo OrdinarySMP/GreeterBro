@@ -3,8 +3,10 @@
   "id": "greeterbro",
   "version": "${version}",
   "name": "GreeterBro",
-  "description": "",
-  "authors": [],
+  "description": "GreeterBro automatically greets players with a custom message whenever a player joins the server.",
+  "authors": [
+    "PadBro"
+  ],
   "contact": {},
   "license": "All-Rights-Reserved",
   "icon": "assets/greeterbro/icon.png",
@@ -18,7 +20,9 @@
     ],
     "main": [
       "com.padbro.greeterbro.GreeterBro"
-    ]
+    ],
+
+    "modmenu": [ "com.padbro.greeterbro.client.config.GreeterBroModMenuImplementation" ]
   },
   "mixins": [
     "greeterbro.mixins.json",
