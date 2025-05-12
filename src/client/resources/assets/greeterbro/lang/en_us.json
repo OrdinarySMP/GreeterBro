@@ -1,11 +1,26 @@
 {
-  "text.autoconfig.GreeterBro.option.general": "General",
-  "text.autoconfig.GreeterBro.option.enableGreeterBro": "Enable",
-  "text.autoconfig.GreeterBro.option.enableGreeterBro.@Tooltip": "Enable the auto greeter",
-  "text.autoconfig.GreeterBro.option.greetings": "Greetings",
-  "text.autoconfig.GreeterBro.option.greetings.@Tooltip": "List of words/phrases used to greet",
-  "text.autoconfig.GreeterBro.option.delayRange": "Delay in ticks range for the auto greeting",
-  "text.autoconfig.GreeterBro.option.delayRange.min": "Min",
-  "text.autoconfig.GreeterBro.option.delayRange.max": "Max",
+  "text.autoconfig.GreeterBro.category.general": "General",
+  "text.autoconfig.GreeterBro.option.generalConfig.enable": "Enable",
+  "text.autoconfig.GreeterBro.option.generalConfig.enable.@Tooltip": "Enable the auto greeter",
+  "text.autoconfig.GreeterBro.option.generalConfig.customMessage": "Custom join message",
+  "text.autoconfig.GreeterBro.option.generalConfig.greetings": "Greetings",
+  "text.autoconfig.GreeterBro.option.generalConfig.greetings.@Tooltip": "List of words/phrases used to greet",
+  "text.autoconfig.GreeterBro.option.generalConfig.delayRange": "Delay in ticks range for the auto greeting",
+  "text.autoconfig.GreeterBro.option.generalConfig.delayRange.min": "Min",
+  "text.autoconfig.GreeterBro.option.generalConfig.delayRange.max": "Max",
+  "text.autoconfig.GreeterBro.option.generalConfig.customFirstJoinMessage": "Custom first join message",
+  "text.autoconfig.GreeterBro.option.generalConfig.customFirstJoinMessage.joinMessage": "Custom join message",
+  "text.autoconfig.GreeterBro.option.generalConfig.customFirstJoinMessage.greeting": "Greeting",
+
+  "text.autoconfig.GreeterBro.category.firstJoin": "First join",
+  "text.autoconfig.GreeterBro.option.firstJoinConfig.enable": "Enable",
+  "text.autoconfig.GreeterBro.option.firstJoinConfig.customMessage": "Custom first join message",
+  "text.autoconfig.GreeterBro.option.firstJoinConfig.greetings": "Greetings",
+
+  "text.autoconfig.GreeterBro.category.nameChange": "Name change",
+  "text.autoconfig.GreeterBro.option.nameChangeConfig.enable": "Enable",
+  "text.autoconfig.GreeterBro.option.nameChangeConfig.customMessage": "Custom name change message",
+  "text.autoconfig.GreeterBro.option.nameChangeConfig.greetings": "Greetings",
+
   "text.autoconfig.GreeterBro.title": "GreeterBro"
 }

@@ -12,7 +12,7 @@ public class TickManager {
 
     public static void onTick() {
         for (ScheduledTask task : tasks) {
-            if (task.remainingTicks <= 0) {;
+            if (task.remainingTicks <= 0) {
                 task.run();
                 tasks.remove(task);
                 return;
