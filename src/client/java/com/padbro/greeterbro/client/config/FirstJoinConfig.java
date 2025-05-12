@@ -1,9 +1,8 @@
 package com.padbro.greeterbro.client.config;
 
+import java.util.List;
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
-
-import java.util.List;
 
 @Config(name = "firstJoin")
 public class FirstJoinConfig implements ConfigData {

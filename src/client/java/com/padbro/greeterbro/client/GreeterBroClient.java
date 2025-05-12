@@ -3,9 +3,9 @@ package com.padbro.greeterbro.client;
 import com.padbro.greeterbro.client.config.GreeterBroConfig;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.ConfigHolder;
+import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
 
 public class GreeterBroClient implements ClientModInitializer {
 

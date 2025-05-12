@@ -11,16 +11,13 @@
   "text.autoconfig.GreeterBro.option.generalConfig.customFirstJoinMessage": "Custom first join message",
   "text.autoconfig.GreeterBro.option.generalConfig.customFirstJoinMessage.joinMessage": "Custom join message",
   "text.autoconfig.GreeterBro.option.generalConfig.customFirstJoinMessage.greeting": "Greeting",
-
   "text.autoconfig.GreeterBro.category.firstJoin": "First join",
   "text.autoconfig.GreeterBro.option.firstJoinConfig.enable": "Enable",
   "text.autoconfig.GreeterBro.option.firstJoinConfig.customMessage": "Custom first join message",
   "text.autoconfig.GreeterBro.option.firstJoinConfig.greetings": "Greetings",
-
   "text.autoconfig.GreeterBro.category.nameChange": "Name change",
   "text.autoconfig.GreeterBro.option.nameChangeConfig.enable": "Enable",
   "text.autoconfig.GreeterBro.option.nameChangeConfig.customMessage": "Custom name change message",
   "text.autoconfig.GreeterBro.option.nameChangeConfig.greetings": "Greetings",
-
   "text.autoconfig.GreeterBro.title": "GreeterBro"
 }

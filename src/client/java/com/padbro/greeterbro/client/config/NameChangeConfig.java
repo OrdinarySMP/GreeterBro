@@ -7,9 +7,9 @@ import java.util.List;
 
 @Config(name = "nameChange")
 public class NameChangeConfig implements ConfigData {
-    public boolean enable = true;
+  public boolean enable = true;
 
-    public String customMessage = "";
+  public String customMessage = "";
 
-    public List<String> greetings = List.of();
+  public List<String> greetings = List.of();
 }

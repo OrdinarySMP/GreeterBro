@@ -21,8 +21,9 @@
     "main": [
       "com.padbro.greeterbro.GreeterBro"
     ],
-
-    "modmenu": [ "com.padbro.greeterbro.client.config.GreeterBroModMenuImplementation" ]
+    "modmenu": [
+      "com.padbro.greeterbro.client.config.GreeterBroModMenuImplementation"
+    ]
   },
   "mixins": [
     "greeterbro.mixins.json",
