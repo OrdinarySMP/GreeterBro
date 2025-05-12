@@ -84,23 +84,29 @@ public class ChatMixin {
 
     @Unique
     private boolean hasKey(Text message, String key) {
+      String vanishKey = "text.vanish.chat.hidden";
         // Vanilla join message
         if (message.getContent() instanceof TranslatableTextContent translatable) {
-            String messagekey = translatable.getKey();
-            return Objects.equals(key, messagekey);
+            String messageKey = translatable.getKey();
+            return Objects.equals(key, messageKey);
         }
 
         // StyledChat modified default message
+        boolean hasKey = false;
         for (Text sibling : message.getSiblings()) {
             if (sibling.getContent() instanceof TranslatableTextContent translatable) {
-                String messagekey = translatable.getKey();
-                if (Objects.equals(messagekey, key)) {
-                    return true;
+                String messageKey = translatable.getKey();
+
+                if (Objects.equals(messageKey, vanishKey)) {
+                    return false;
+                }
+                if (Objects.equals(messageKey, key)) {
+                    hasKey = true;
                 }
             }
         }
 
-        return false;
+        return hasKey;
     }
 
     @Unique
