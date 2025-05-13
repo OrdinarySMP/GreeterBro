@@ -19,5 +19,11 @@
   "text.autoconfig.GreeterBro.option.nameChangeConfig.enable": "Enable",
   "text.autoconfig.GreeterBro.option.nameChangeConfig.customMessage": "Custom name change message",
   "text.autoconfig.GreeterBro.option.nameChangeConfig.greetings": "Greetings",
+  "text.autoconfig.GreeterBro.category.returningPlayer": "Returning player",
+  "text.autoconfig.GreeterBro.option.returningPlayerConfig.enable": "Enable",
+  "text.autoconfig.GreeterBro.option.returningPlayerConfig.ignoreForMin": "Ignore join for x min",
+  "text.autoconfig.GreeterBro.option.returningPlayerConfig.greetings": "Greetings",
+  "text.autoconfig.GreeterBro.category.blacklist": "Blacklist",
+  "text.autoconfig.GreeterBro.option.blacklistConfig.players": "Players",
   "text.autoconfig.GreeterBro.title": "GreeterBro"
 }

@@ -1,9 +1,12 @@
 package com.padbro.greeterbro.client.mixin;
 
 import com.padbro.greeterbro.client.GreeterBroClient;
+import com.padbro.greeterbro.client.JoinCache;
 import com.padbro.greeterbro.client.TickManager;
 import com.padbro.greeterbro.client.TickManager.ScheduledTask;
 import com.padbro.greeterbro.client.config.GreeterBroConfig;
+
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
@@ -13,6 +16,7 @@ import net.minecraft.client.network.message.MessageHandler;
 import net.minecraft.text.PlainTextContent;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableTextContent;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -25,38 +29,85 @@ public class ChatMixin {
 
   @Inject(method = "onGameMessage", at = @At("HEAD"))
   public void onMessage(Text message, boolean overlay, CallbackInfo ci) {
-    if (!this.config.generalConfig.enable) {
-      return;
-    }
-    if (MinecraftClient.getInstance().player == null) {
+    if (!this.config.generalConfig.enable || MinecraftClient.getInstance().player == null) {
       return;
     }
 
-    List<String> greetingList = this.getGreetingList(message);
-    if (greetingList == null || greetingList.isEmpty()) {
+    List<String> greetingList;
+    String player;
+
+
+    if (this.isFirstJoin(message)) {
+      greetingList = this.config.firstJoinConfig.greetings;
+      player = getPlayerName(message, this.config.firstJoinConfig.customMessage);
+    } else if (this.isNameChange(message)) {
+      greetingList = this.config.nameChangeConfig.greetings;
+      player = getPlayerName(message, this.config.nameChangeConfig.customMessage);
+    } else if (this.isJoinMessage(message)) {
+      greetingList = this.config.generalConfig.greetings;
+      player = getPlayerName(message, this.config.generalConfig.customMessage);
+    } else {
       return;
     }
 
+    if (player != null) {
+      if (this.config.blacklistConfig.players.contains(player)) {
+        return;
+      }
+
+      if (this.config.returningPlayerConfig.enable) {
+        if (JoinCache.hasRecentlyJoined(player)) {
+          return;
+        }
+        if (JoinCache.hasJoined(player)) {
+          greetingList = this.config.returningPlayerConfig.greetings;
+        }
+      }
+
+      JoinCache.add(player);
+    }
+
+    List<String> finalGreetingList = greetingList;
     TickManager.scheduleTask(
         new ScheduledTask(
             this.config.generalConfig.delayRange.getRandomDelay(),
             () -> {
               Random rand = new Random();
-              String greeting = greetingList.get(rand.nextInt(greetingList.size()));
+              String greeting = finalGreetingList.get(rand.nextInt(finalGreetingList.size()));
               MinecraftClient.getInstance().player.networkHandler.sendChatMessage(greeting);
             }));
   }
 
   @Unique
-  private List<String> getGreetingList(Text message) {
-    if (this.isFirstJoin(message)) {
-      return this.config.firstJoinConfig.greetings;
-    } else if (this.isNameChange(message)) {
-      return this.config.nameChangeConfig.greetings;
-    } else if (this.isJoinMessage(message)) {
-      return this.config.generalConfig.greetings;
+  private String getPlayerName(Text message, @Nullable String customMessage) {
+    // 1. Try Translatable content (vanilla join/rename messages)
+    if (message.getContent() instanceof TranslatableTextContent translatable) {
+      if (translatable.getArgs().length > 0) {
+        return translatable.getArg(0).getString();
+      }
     }
-    return List.of();
+
+    for (Text sibling : message.getSiblings()) {
+      if (sibling.getContent() instanceof TranslatableTextContent translatable) {
+        if (translatable.getArgs().length > 0) {
+          return translatable.getArg(0).getString();
+        }
+      }
+    }
+
+    String flatMessage = message.getString();
+    if (customMessage == null || customMessage.isEmpty()) {
+      return null;
+    }
+
+    Pattern pattern = Pattern.compile(customMessage);
+    var matcher = pattern.matcher(flatMessage);
+
+    if (matcher.matches() && matcher.groupCount() >= 1) {
+      return matcher.group(1);
+    }
+
+    return null; // Couldn't extract player name
   }
 
   @Unique
@@ -99,6 +150,7 @@ public class ChatMixin {
       if (sibling.getContent() instanceof TranslatableTextContent translatable) {
         String messageKey = translatable.getKey();
 
+        // ignore if user is in vanish
         if (Objects.equals(messageKey, vanishKey)) {
           return false;
         }
@@ -114,27 +166,6 @@ public class ChatMixin {
   @Unique
   private boolean hasContent(Text message, String content) {
     Pattern pattern = Pattern.compile(content);
-    StringBuilder fullMessage = new StringBuilder();
-
-    if (Objects.equals(content, "")) {
-      return false;
-    }
-
-    for (Text sibling : message.getSiblings()) {
-      if (sibling.getContent() instanceof PlainTextContent.Literal(String string)) {
-        if (pattern.matcher(string.trim()).matches()) {
-          return true;
-        }
-        fullMessage.append(string.trim()).append(" ");
-      }
-
-      for (Text siblingSiblings : sibling.getSiblings()) {
-        if (siblingSiblings.getContent() instanceof PlainTextContent.Literal(String string)) {
-          fullMessage.append(string.trim()).append(" ");
-        }
-      }
-    }
-
-    return pattern.matcher(fullMessage.toString().trim()).matches();
+    return pattern.matcher(message.getString().trim()).matches();
   }
 }
