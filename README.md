@@ -26,7 +26,7 @@ All options are available in-game via the **Mod Menu** UI (requires the [Mod Men
 - **First Join Message** – Message shown only the first time a player joins.
 - **Greet on Name Change** – Whether to greet players when they log in with a different name than last time.
 - **Blacklist** – A list of usernames that should not be greeted.
-- **Delay Range** – Set minimum and maximum delay (in seconds). A random number in this range will be chosen each time.
+- **Delay Range** – Set minimum and maximum delay (in ticks). A random number in this range will be chosen each time.
 
 ---
 
@@ -39,16 +39,10 @@ All options are available in-game via the **Mod Menu** UI (requires the [Mod Men
 
 ## 📦 Installation
 
-1. Download **Greeter Bro** from the [releases](#) page.
+1. Download **Greeter Bro** from the [releases](https://modrinth.com/mod/greeterbro/versions) page.
 2. Place the `.jar` file in your Minecraft `mods` folder.
-3. Launch the game with a compatible mod loader (e.g. Fabric).
+3. Launch the game with a compatible mod loader.
 4. Configure the mod via Mod Menu in the title screen or pause menu.
-
----
-
-## 📃 License
-
-MIT License
 
 ---
 

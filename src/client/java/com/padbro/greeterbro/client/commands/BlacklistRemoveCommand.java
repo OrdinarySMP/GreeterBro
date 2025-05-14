@@ -17,13 +17,13 @@ public class BlacklistRemoveCommand implements Command<FabricClientCommandSource
     String player = getString(context, "player");
 
     if (!config.blacklistConfig.players.contains(player)) {
-      source.sendError(Text.literal("The player is not in the blacklist."));
+      source.sendError(Text.translatable("text.command.GreeterBro.blacklist.remove.error.exists"));
       return 0;
     }
 
     config.blacklistConfig.players.remove(player);
     source.sendFeedback(
-        Text.literal("The player \"" + player + "\" has been removed from the blacklist."));
+        Text.translatable("text.command.GreeterBro.blacklist.remove.success", player));
     return 0;
   }
 }

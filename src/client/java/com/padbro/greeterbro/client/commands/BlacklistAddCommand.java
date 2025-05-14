@@ -16,13 +16,13 @@ public class BlacklistAddCommand implements Command<FabricClientCommandSource> {
     FabricClientCommandSource source = context.getSource();
     String player = getString(context, "player");
     if (config.blacklistConfig.players.contains(player)) {
-      source.sendError(Text.literal("The player is already in the blacklist."));
+
+      source.sendError(Text.translatable("text.command.GreeterBro.blacklist.add.error.exists"));
       return 0;
     }
 
     config.blacklistConfig.players.add(player);
-    source.sendFeedback(
-        Text.literal("The player \"" + player + "\" has been added to the blacklist."));
+    source.sendFeedback(Text.translatable("text.command.GreeterBro.blacklist.add.success", player));
     return 0;
   }
 }

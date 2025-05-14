@@ -15,11 +15,10 @@ public class BlacklistGetCommand implements Command<FabricClientCommandSource> {
     String players = String.join(", ", config.blacklistConfig.players);
 
     source.sendFeedback(
-        Text.literal(
-            "You have "
-                + config.blacklistConfig.players.size()
-                + " players blacklisted:\n"
-                + players));
+        Text.translatable(
+            "text.command.GreeterBro.blacklist.get.success",
+            config.blacklistConfig.players.size(),
+            players));
     return 0;
   }
 }
