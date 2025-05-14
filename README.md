@@ -1,2 +1,7 @@
 remove cache on joining new world
-add option to send message on own join
+add option to send message on own join\
+
+
+custom join message
+
+name change

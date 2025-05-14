@@ -27,4 +27,8 @@ public class JoinCache {
                 GreeterBroClient.config.get().returningPlayerConfig.ignoreForMin,
                 ChronoUnit.SECONDS));
   }
+
+    public static void clear() {
+      joins.clear();
+    }
 }

@@ -10,7 +10,9 @@ import me.shedaniel.autoconfig.annotation.ConfigEntry;
 public class GeneralConfig implements ConfigData {
   @ConfigEntry.Gui.Tooltip public boolean enable = true;
 
-  public String customMessage = "";
+  @ConfigEntry.Gui.Tooltip public boolean enableOwnJoin = true;
+
+  @ConfigEntry.Gui.Tooltip public String customMessage = "";
 
   @ConfigEntry.Gui.Tooltip public List<String> greetings = List.of("Hello", "o/");
 
