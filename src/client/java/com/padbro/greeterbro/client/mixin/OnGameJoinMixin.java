@@ -4,6 +4,8 @@ import com.padbro.greeterbro.client.GreeterBroClient;
 import com.padbro.greeterbro.client.JoinCache;
 import com.padbro.greeterbro.client.TickManager;
 import com.padbro.greeterbro.client.config.GreeterBroConfig;
+import java.util.List;
+import java.util.Random;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -13,15 +15,16 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.List;
-import java.util.Random;
-
 @Mixin(ClientPlayNetworkHandler.class)
-public class onGameJoinMixin {
+public class OnGameJoinMixin {
     @Inject(at = @At("RETURN"), method = "onGameJoin")
     public void onReady(GameJoinS2CPacket packet, CallbackInfo ci) {
+        GreeterBroConfig config = GreeterBroClient.getConfig();
+        if (!config.generalConfig.enable) {
+            return;
+        }
+
         JoinCache.clear();
-        GreeterBroConfig config = GreeterBroClient.config.get();
         if (config.generalConfig.enableOwnJoin) {
             List<String> greetingList = config.generalConfig.greetings;
 

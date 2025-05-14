@@ -12,7 +12,7 @@ public class BlacklistSuggestionProvider implements SuggestionProvider<FabricCli
   @Override
   public CompletableFuture<Suggestions> getSuggestions(
       CommandContext<FabricClientCommandSource> context, SuggestionsBuilder builder) {
-    for (String playerName : GreeterBroClient.config.get().blacklistConfig.players) {
+    for (String playerName : GreeterBroClient.getConfig().blacklistConfig.players) {
       builder.suggest(playerName);
     }
 

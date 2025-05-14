@@ -13,7 +13,7 @@ public class JoinCache {
   }
 
   public static boolean hasJoined(String player) {
-    return joins.get(player) != null;
+    return joins.containsKey(player);
   }
 
   public static boolean hasRecentlyJoined(String player) {
@@ -24,11 +24,11 @@ public class JoinCache {
     return joinedAt.isAfter(
         Instant.now()
             .minus(
-                GreeterBroClient.config.get().returningPlayerConfig.ignoreForMin,
-                ChronoUnit.SECONDS));
+                GreeterBroClient.getConfig().returningPlayerConfig.ignoreForMin,
+                ChronoUnit.MINUTES));
   }
 
-    public static void clear() {
-      joins.clear();
-    }
+  public static void clear() {
+    joins.clear();
+  }
 }

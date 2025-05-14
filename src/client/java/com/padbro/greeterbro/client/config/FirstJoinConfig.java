@@ -7,9 +7,9 @@ import me.shedaniel.autoconfig.annotation.ConfigEntry;
 
 @Config(name = "firstJoin")
 public class FirstJoinConfig implements ConfigData {
-    public boolean enable = true;
+  public boolean enable = true;
 
-    @ConfigEntry.Gui.Tooltip public String customMessage = "";
+  @ConfigEntry.Gui.Tooltip public String customMessage = "";
 
-    @ConfigEntry.Gui.Tooltip public List<String> greetings = List.of("Welcome");
+  @ConfigEntry.Gui.Tooltip public List<String> greetings = List.of("Welcome");
 }

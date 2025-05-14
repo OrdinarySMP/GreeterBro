@@ -1,7 +1,57 @@
-remove cache on joining new world
-add option to send message on own join\
+# Greeter Bro
 
+**Greeter Bro** is a simple Minecraft mod that automatically greets players when they join the game. It's fully configurable via the **Mod Menu** UI and is perfect for community servers that want to add a friendly touch.
 
-custom join message
+---
 
-name change
+## 🎉 Features
+
+- **Auto Greeting on Join** – Automatically sends a chat message to welcome players.
+- **First-Time Join Support** – Show a different message for new players.
+- **Name Change Detection** – Optionally greet players when they join under a new name.
+- **Player Blacklist** – Prevent specific players from being greeted.
+- **Randomized Delay** – Greetings are sent after a random delay within a configurable time range.
+- **Configurable via Mod Menu** – No need to edit config files manually.
+
+---
+
+## ⚙️ Configuration
+
+All options are available in-game via the **Mod Menu** UI (requires the [Mod Menu](https://modrinth.com/mod/modmenu) mod).
+
+### Settings
+
+- **Enable Join Greetings** – Toggle greeting functionality on or off.
+- **Join Message** – The message sent to regular players.
+- **First Join Message** – Message shown only the first time a player joins.
+- **Greet on Name Change** – Whether to greet players when they log in with a different name than last time.
+- **Blacklist** – A list of usernames that should not be greeted.
+- **Delay Range** – Set minimum and maximum delay (in seconds). A random number in this range will be chosen each time.
+
+---
+
+## 🧩 Requirements
+
+- Minecraft (supported versions listed in the mod's release info)
+- [Mod Menu](https://modrinth.com/mod/modmenu) (for configuration)
+
+---
+
+## 📦 Installation
+
+1. Download **Greeter Bro** from the [releases](#) page.
+2. Place the `.jar` file in your Minecraft `mods` folder.
+3. Launch the game with a compatible mod loader (e.g. Fabric).
+4. Configure the mod via Mod Menu in the title screen or pause menu.
+
+---
+
+## 📃 License
+
+MIT License
+
+---
+
+## 🙋 Support & Feedback
+
+Have an idea or found a bug? Open an issue or contribute on the [GitHub repository](https://github.com/OrdinarySMP/GreeterBro).

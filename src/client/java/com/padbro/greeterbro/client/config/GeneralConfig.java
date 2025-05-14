@@ -19,6 +19,17 @@ public class GeneralConfig implements ConfigData {
   @ConfigEntry.Gui.CollapsibleObject(startExpanded = true)
   public DelayRange delayRange = new DelayRange(20, 60);
 
+  @Override
+  public void validatePostLoad() {
+    int actualMin = Math.min(this.delayRange.min, this.delayRange.max);
+    int actualMax = Math.max(this.delayRange.min, this.delayRange.max);
+    this.delayRange.min = actualMin;
+    this.delayRange.max = actualMax;
+
+    this.greetings =
+        greetings.stream().filter(s -> !s.trim().isEmpty()).collect(Collectors.toList());
+  }
+
   public static class DelayRange {
     @ConfigEntry.BoundedDiscrete(max = 100)
     int min;
@@ -34,16 +45,5 @@ public class GeneralConfig implements ConfigData {
     public int getRandomDelay() {
       return (int) (Math.random() * (this.max - this.min + 1)) + this.min;
     }
-  }
-
-  @Override
-  public void validatePostLoad() {
-    int actualMin = Math.min(this.delayRange.min, this.delayRange.max);
-    int actualMax = Math.max(this.delayRange.min, this.delayRange.max);
-    this.delayRange.min = actualMin;
-    this.delayRange.max = actualMax;
-
-    this.greetings =
-        greetings.stream().filter(s -> !s.trim().isEmpty()).collect(Collectors.toList());
   }
 }

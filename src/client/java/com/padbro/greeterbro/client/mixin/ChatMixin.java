@@ -5,15 +5,12 @@ import com.padbro.greeterbro.client.JoinCache;
 import com.padbro.greeterbro.client.TickManager;
 import com.padbro.greeterbro.client.TickManager.ScheduledTask;
 import com.padbro.greeterbro.client.config.GreeterBroConfig;
-
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 import java.util.regex.Pattern;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.message.MessageHandler;
-import net.minecraft.text.PlainTextContent;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableTextContent;
 import org.jetbrains.annotations.Nullable;
@@ -25,42 +22,41 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(MessageHandler.class)
 public class ChatMixin {
-  @Unique private final GreeterBroConfig config = GreeterBroClient.config.get();
 
   @Inject(method = "onGameMessage", at = @At("HEAD"))
   public void onMessage(Text message, boolean overlay, CallbackInfo ci) {
-    if (!this.config.generalConfig.enable || MinecraftClient.getInstance().player == null) {
+    GreeterBroConfig config = GreeterBroClient.getConfig();
+    if (!config.generalConfig.enable || MinecraftClient.getInstance().player == null) {
       return;
     }
 
     List<String> greetingList;
     String player;
 
-
     if (this.isFirstJoin(message)) {
-      greetingList = this.config.firstJoinConfig.greetings;
-      player = getPlayerName(message, this.config.firstJoinConfig.customMessage);
+      greetingList = config.firstJoinConfig.greetings;
+      player = getPlayerName(message, config.firstJoinConfig.customMessage);
     } else if (this.isNameChange(message)) {
-      greetingList = this.config.nameChangeConfig.greetings;
-      player = getPlayerName(message, this.config.nameChangeConfig.customMessage);
+      greetingList = config.nameChangeConfig.greetings;
+      player = getPlayerName(message, config.nameChangeConfig.customMessage);
     } else if (this.isJoinMessage(message)) {
-      greetingList = this.config.generalConfig.greetings;
-      player = getPlayerName(message, this.config.generalConfig.customMessage);
+      greetingList = config.generalConfig.greetings;
+      player = getPlayerName(message, config.generalConfig.customMessage);
     } else {
       return;
     }
 
     if (player != null) {
-      if (this.config.blacklistConfig.players.contains(player)) {
+      if (config.blacklistConfig.players.contains(player)) {
         return;
       }
 
-      if (this.config.returningPlayerConfig.enable) {
+      if (config.returningPlayerConfig.enable) {
         if (JoinCache.hasRecentlyJoined(player)) {
           return;
         }
         if (JoinCache.hasJoined(player)) {
-          greetingList = this.config.returningPlayerConfig.greetings;
+          greetingList = config.returningPlayerConfig.greetings;
         }
       }
 
@@ -70,7 +66,7 @@ public class ChatMixin {
     List<String> finalGreetingList = greetingList;
     TickManager.scheduleTask(
         new ScheduledTask(
-            this.config.generalConfig.delayRange.getRandomDelay(),
+            config.generalConfig.delayRange.getRandomDelay(),
             () -> {
               Random rand = new Random();
               String greeting = finalGreetingList.get(rand.nextInt(finalGreetingList.size()));
@@ -114,25 +110,25 @@ public class ChatMixin {
   private boolean isJoinMessage(Text message) {
     String joinMessageKey = "multiplayer.player.joined";
     return this.hasKey(message, joinMessageKey)
-        || hasContent(message, this.config.generalConfig.customMessage);
+        || this.hasContent(message, GreeterBroClient.getConfig().generalConfig.customMessage);
   }
 
   @Unique
   private boolean isFirstJoin(Text message) {
-    if (!this.config.firstJoinConfig.enable) {
+    if (!GreeterBroClient.getConfig().firstJoinConfig.enable) {
       return false;
     }
-    return hasContent(message, this.config.firstJoinConfig.customMessage);
+    return this.hasContent(message, GreeterBroClient.getConfig().firstJoinConfig.customMessage);
   }
 
   @Unique
   private boolean isNameChange(Text message) {
-    if (!this.config.nameChangeConfig.enable) {
+    if (!GreeterBroClient.getConfig().nameChangeConfig.enable) {
       return false;
     }
     String nameChangeKey = "multiplayer.player.joined.renamed";
     return this.hasKey(message, nameChangeKey)
-        || hasContent(message, this.config.nameChangeConfig.customMessage);
+        || this.hasContent(message, GreeterBroClient.getConfig().nameChangeConfig.customMessage);
   }
 
   @Unique

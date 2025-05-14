@@ -22,12 +22,10 @@ public class TickManager {
   }
 
   public static class ScheduledTask {
-    private int delayInTicks;
-    int remainingTicks;
     final Runnable task;
+    int remainingTicks;
 
     public ScheduledTask(int delayInTicks, Runnable task) {
-      this.delayInTicks = delayInTicks;
       this.task = task;
       this.remainingTicks = delayInTicks;
     }

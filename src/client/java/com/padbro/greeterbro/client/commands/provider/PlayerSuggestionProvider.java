@@ -4,27 +4,26 @@ import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.suggestion.SuggestionProvider;
 import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
-import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
-
 import java.util.Collection;
 import java.util.concurrent.CompletableFuture;
+import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 
-public class PlayerSuggestionProvider
-    implements SuggestionProvider<FabricClientCommandSource> {
-    @Override
-    public CompletableFuture<Suggestions> getSuggestions(
-            CommandContext<FabricClientCommandSource> context, SuggestionsBuilder builder) {
-        FabricClientCommandSource source = context.getSource();
+public class PlayerSuggestionProvider implements SuggestionProvider<FabricClientCommandSource> {
+  @Override
+  public CompletableFuture<Suggestions> getSuggestions(
+      CommandContext<FabricClientCommandSource> context, SuggestionsBuilder builder) {
+    FabricClientCommandSource source = context.getSource();
 
-        // Thankfully, the ServerCommandSource has a method to get a list of player names.
-        Collection<String> playerNames = source.getPlayerNames();
+    String partialQuery = builder.getRemainingLowerCase();
 
-        // Add all player names to the builder.
-        for (String playerName : playerNames) {
-            builder.suggest(playerName);
-        }
+    Collection<String> playerNames = source.getPlayerNames();
 
-        // Lock the suggestions after we've modified them.
-        return builder.buildFuture();
+    for (String playerName : playerNames) {
+      if (playerName.toLowerCase().startsWith(partialQuery)) {
+        builder.suggest(playerName);
+      }
     }
+
+    return builder.buildFuture();
+  }
 }

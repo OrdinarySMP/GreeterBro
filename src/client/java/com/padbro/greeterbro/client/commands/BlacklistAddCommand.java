@@ -12,7 +12,7 @@ import net.minecraft.text.Text;
 public class BlacklistAddCommand implements Command<FabricClientCommandSource> {
   @Override
   public int run(CommandContext<FabricClientCommandSource> context) {
-    GreeterBroConfig config = GreeterBroClient.config.get();
+    GreeterBroConfig config = GreeterBroClient.getConfig();
     FabricClientCommandSource source = context.getSource();
     String player = getString(context, "player");
     if (config.blacklistConfig.players.contains(player)) {

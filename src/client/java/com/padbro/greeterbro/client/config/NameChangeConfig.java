@@ -1,10 +1,9 @@
 package com.padbro.greeterbro.client.config;
 
+import java.util.List;
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
-
-import java.util.List;
 
 @Config(name = "nameChange")
 public class NameChangeConfig implements ConfigData {

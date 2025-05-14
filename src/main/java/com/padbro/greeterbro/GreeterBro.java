@@ -4,7 +4,6 @@ import net.fabricmc.api.ModInitializer;
 
 public class GreeterBro implements ModInitializer {
 
-    @Override
-    public void onInitialize() {
-    }
+  @Override
+  public void onInitialize() {}
 }

@@ -21,7 +21,11 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 
 public class GreeterBroClient implements ClientModInitializer {
 
-  public static ConfigHolder<GreeterBroConfig> config;
+  private static ConfigHolder<GreeterBroConfig> config;
+
+  public static GreeterBroConfig getConfig() {
+    return config.get();
+  }
 
   @Override
   public void onInitializeClient() {

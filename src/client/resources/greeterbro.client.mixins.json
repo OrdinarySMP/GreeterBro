@@ -4,12 +4,13 @@
   "package": "com.padbro.greeterbro.client.mixin",
   "compatibilityLevel": "JAVA_21",
   "client": [
+    "OnGameJoinMixin"
   ],
   "injectors": {
     "defaultRequire": 1
   },
   "mixins": [
     "ChatMixin",
-    "onGameJoinMixin"
+    "OnGameJoinMixin"
   ]
 }
