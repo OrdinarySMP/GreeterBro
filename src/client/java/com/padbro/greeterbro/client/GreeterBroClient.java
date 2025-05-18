@@ -24,7 +24,12 @@ public class GreeterBroClient implements ClientModInitializer {
   private static ConfigHolder<GreeterBroConfig> config;
 
   public static GreeterBroConfig getConfig() {
+    config.save();
     return config.get();
+  }
+
+  public static void saveConfig() {
+    config.save();
   }
 
   @Override
@@ -45,6 +50,7 @@ public class GreeterBroClient implements ClientModInitializer {
                 literal("greeterBro")
                     .then(
                         literal("blacklist")
+                            .executes(new BlacklistGetCommand())
                             .then(
                                 literal("add")
                                     .then(
@@ -56,7 +62,6 @@ public class GreeterBroClient implements ClientModInitializer {
                                     .then(
                                         argument("player", string())
                                             .suggests(blacklistSuggestionProvider)
-                                            .executes(new BlacklistRemoveCommand())))
-                            .then(literal("get").executes(new BlacklistGetCommand()))))));
+                                            .executes(new BlacklistRemoveCommand())))))));
   }
 }

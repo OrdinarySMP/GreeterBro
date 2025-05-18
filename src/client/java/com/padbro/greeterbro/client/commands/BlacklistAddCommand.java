@@ -22,6 +22,7 @@ public class BlacklistAddCommand implements Command<FabricClientCommandSource> {
     }
 
     config.blacklistConfig.players.add(player);
+    GreeterBroClient.saveConfig();
     source.sendFeedback(Text.translatable("text.command.GreeterBro.blacklist.add.success", player));
     return 0;
   }

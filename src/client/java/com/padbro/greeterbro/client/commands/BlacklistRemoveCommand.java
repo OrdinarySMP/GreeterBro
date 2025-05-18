@@ -22,6 +22,7 @@ public class BlacklistRemoveCommand implements Command<FabricClientCommandSource
     }
 
     config.blacklistConfig.players.remove(player);
+    GreeterBroClient.saveConfig();
     source.sendFeedback(
         Text.translatable("text.command.GreeterBro.blacklist.remove.success", player));
     return 0;
