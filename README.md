@@ -2,6 +2,10 @@
 
 **Greeter Bro** is a simple Minecraft mod that automatically greets players when they join the game. It's fully configurable via the **Mod Menu** UI and is perfect for community servers that want to add a friendly touch.
 
+It supports and integrates with [**Styled Chat**](https://modrinth.com/mod/styled-chat), detecting its formatted join messages and responding accordingly, making Greeter Bro compatible with customized chat systems used by many modded servers.
+
+Also, GreeterBro detects silent join messages from the [**Vanish**](https://modrinth.com/mod/vanish) mod and ignores them, ensuring vanished players are not greeted publicly.
+
 ---
 
 ## 🎉 Features
