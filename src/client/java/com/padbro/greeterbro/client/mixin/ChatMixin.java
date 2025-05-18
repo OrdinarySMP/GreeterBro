@@ -161,7 +161,11 @@ public class ChatMixin {
 
   @Unique
   private boolean hasContent(Text message, String content) {
+    String messageString = message.getString().trim();
+    if (Objects.equals(content, "") || Objects.equals(messageString, "")) {
+      return false;
+    }
     Pattern pattern = Pattern.compile(content);
-    return pattern.matcher(message.getString().trim()).matches();
+    return pattern.matcher(messageString).matches();
   }
 }
