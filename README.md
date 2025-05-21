@@ -16,6 +16,7 @@ Also, GreeterBro detects silent join messages from the [**Vanish**](https://modr
 - **Player Blacklist** – Prevent specific players from being greeted.
 - **Randomized Delay** – Greetings are sent after a random delay within a configurable time range.
 - **Configurable via Mod Menu** – No need to edit config files manually.
+- **%player% Placeholder Support** – Insert the joining player’s name into greetings.
 
 ---
 
