@@ -37,7 +37,8 @@ public class OnGameJoinMixin {
                             config.generalConfig.delayRange.getRandomDelay(),
                             () -> {
                                 Random rand = new Random();
-                                String greeting = greetingList.get(rand.nextInt(greetingList.size()));
+                                String greetingTemplate = greetingList.get(rand.nextInt(greetingList.size()));
+                                String greeting = greetingTemplate.replaceAll("\\s*%player%", "");
                                 player.networkHandler.sendChatMessage(greeting);
                             }));
 
