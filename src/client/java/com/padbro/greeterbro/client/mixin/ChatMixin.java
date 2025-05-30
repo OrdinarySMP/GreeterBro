@@ -63,6 +63,10 @@ public class ChatMixin {
       JoinCache.add(player);
     }
 
+    if (Math.random() > (double) config.generalConfig.greetingChance / 100) {
+      return;
+    }
+
     List<String> finalGreetingList = greetingList;
     TickManager.scheduleTask(
         new ScheduledTask(

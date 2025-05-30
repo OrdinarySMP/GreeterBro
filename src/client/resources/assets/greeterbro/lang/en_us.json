@@ -6,6 +6,8 @@
   "text.autoconfig.GreeterBro.option.generalConfig.enableOwnJoin.@Tooltip": "If enabled, sends a greeting when you join a world.",
   "text.autoconfig.GreeterBro.option.generalConfig.customMessage": "Custom join message",
   "text.autoconfig.GreeterBro.option.generalConfig.customMessage.@Tooltip": "Custom join message sent by the server. Regex supported. The first capture group will be used as the player name.",
+  "text.autoconfig.GreeterBro.option.generalConfig.greetingChance": "Chance to greet a player",
+  "text.autoconfig.GreeterBro.option.generalConfig.greetingChance.@Tooltip": "100 = greet always",
   "text.autoconfig.GreeterBro.option.generalConfig.greetings": "Greetings",
   "text.autoconfig.GreeterBro.option.generalConfig.greetings.@Tooltip": "List of greetings to choose from.",
   "text.autoconfig.GreeterBro.option.generalConfig.delayRange": "Delay in ticks range for the auto greeting",
