@@ -43,8 +43,6 @@ public class GreeterBroClient implements ClientModInitializer {
 
   @Override
   public void onInitializeClient() {
-    GreeterBroClient.LOGGER.warn("Failed to save cache data to file");
-
     config = AutoConfig.register(GreeterBroConfig.class, Toml4jConfigSerializer::new);
 
     joinCache = JoinCache.loadCache();
