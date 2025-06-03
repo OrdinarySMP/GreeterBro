@@ -78,7 +78,9 @@ public class ChatMixin {
               String greetingTemplate =
                   finalGreetingList.get(rand.nextInt(finalGreetingList.size()));
               String greeting = greetingTemplate.replace("%player%", player != null ? player : "");
-              MinecraftClient.getInstance().player.networkHandler.sendChatMessage(greeting);
+              if (!greeting.isEmpty()) {
+                MinecraftClient.getInstance().player.networkHandler.sendChatMessage(greeting);
+              }
             }));
   }
 
