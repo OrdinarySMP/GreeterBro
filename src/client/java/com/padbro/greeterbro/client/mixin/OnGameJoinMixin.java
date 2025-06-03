@@ -17,32 +17,34 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ClientPlayNetworkHandler.class)
 public class OnGameJoinMixin {
-    @Inject(at = @At("RETURN"), method = "onGameJoin")
-    public void onReady(GameJoinS2CPacket packet, CallbackInfo ci) {
-        GreeterBroConfig config = GreeterBroClient.getConfig();
-        if (!config.generalConfig.enable) {
-            return;
-        }
-
-        JoinCache.clear();
-        if (config.generalConfig.enableOwnJoin) {
-            List<String> greetingList = config.generalConfig.greetings;
-
-            ClientPlayerEntity player = MinecraftClient.getInstance().player;
-            if (player == null) {
-                return;
-            }
-            TickManager.scheduleTask(
-                    new TickManager.ScheduledTask(
-                            config.generalConfig.delayRange.getRandomDelay(),
-                            () -> {
-                                Random rand = new Random();
-                                String greetingTemplate = greetingList.get(rand.nextInt(greetingList.size()));
-                                String greeting = greetingTemplate.replaceAll("\\s*%player%", "");
-                                player.networkHandler.sendChatMessage(greeting);
-                            }));
-
-        }
-
+  @Inject(at = @At("RETURN"), method = "onGameJoin")
+  public void onReady(GameJoinS2CPacket packet, CallbackInfo ci) {
+    GreeterBroConfig config = GreeterBroClient.getConfig();
+    JoinCache joinCache = GreeterBroClient.getJoinCache();
+    if (!config.generalConfig.enable) {
+      return;
     }
+
+    if (joinCache.shouldClearOnJoin()) {
+      GreeterBroClient.getJoinCache().clear();
+    }
+
+    if (config.generalConfig.enableOwnJoin) {
+      List<String> greetingList = config.generalConfig.greetings;
+
+      ClientPlayerEntity player = MinecraftClient.getInstance().player;
+      if (player == null) {
+        return;
+      }
+      TickManager.scheduleTask(
+          new TickManager.ScheduledTask(
+              config.generalConfig.delayRange.getRandomDelay(),
+              () -> {
+                Random rand = new Random();
+                String greetingTemplate = greetingList.get(rand.nextInt(greetingList.size()));
+                String greeting = greetingTemplate.replaceAll("\\s*%player%", "");
+                player.networkHandler.sendChatMessage(greeting);
+              }));
+    }
+  }
 }

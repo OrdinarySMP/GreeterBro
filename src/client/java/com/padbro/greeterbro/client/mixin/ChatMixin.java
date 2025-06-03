@@ -50,17 +50,19 @@ public class ChatMixin {
       if (config.blacklistConfig.players.contains(player)) {
         return;
       }
+      JoinCache joinCache = GreeterBroClient.getJoinCache();
 
       if (config.returningPlayerConfig.enable) {
-        if (JoinCache.hasRecentlyJoined(player)) {
+        if (joinCache.hasRecentlyJoined(player)) {
           return;
         }
-        if (JoinCache.hasJoined(player)) {
+        if (joinCache.hasJoined(player)
+            && !player.equals(MinecraftClient.getInstance().player.getName().getString())) {
           greetingList = config.returningPlayerConfig.greetings;
         }
       }
 
-      JoinCache.add(player);
+      joinCache.add(player);
     }
 
     if (Math.random() > (double) config.generalConfig.greetingChance / 100) {
@@ -73,7 +75,8 @@ public class ChatMixin {
             config.generalConfig.delayRange.getRandomDelay(),
             () -> {
               Random rand = new Random();
-              String greetingTemplate = finalGreetingList.get(rand.nextInt(finalGreetingList.size()));
+              String greetingTemplate =
+                  finalGreetingList.get(rand.nextInt(finalGreetingList.size()));
               String greeting = greetingTemplate.replace("%player%", player != null ? player : "");
               MinecraftClient.getInstance().player.networkHandler.sendChatMessage(greeting);
             }));
