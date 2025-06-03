@@ -18,14 +18,23 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class GreeterBroClient implements ClientModInitializer {
 
   private static ConfigHolder<GreeterBroConfig> config;
+  private static JoinCache joinCache;
+  public static final String MOD_ID = "GreeterBro";
+  public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
   public static GreeterBroConfig getConfig() {
     config.save();
     return config.get();
+  }
+
+  public static JoinCache getJoinCache() {
+    return joinCache;
   }
 
   public static void saveConfig() {
@@ -34,7 +43,12 @@ public class GreeterBroClient implements ClientModInitializer {
 
   @Override
   public void onInitializeClient() {
+    GreeterBroClient.LOGGER.warn("Failed to save cache data to file");
+
     config = AutoConfig.register(GreeterBroConfig.class, Toml4jConfigSerializer::new);
+
+    joinCache = JoinCache.loadCache();
+
     ClientTickEvents.END_CLIENT_TICK.register(
         client -> {
           TickManager.onTick();

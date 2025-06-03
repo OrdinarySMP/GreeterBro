@@ -31,6 +31,8 @@
   "text.autoconfig.GreeterBro.category.returningPlayer": "Returning player",
   "text.autoconfig.GreeterBro.option.returningPlayerConfig.enable": "Enable",
   "text.autoconfig.GreeterBro.option.returningPlayerConfig.ignoreForMin": "Ignore join for X minutes",
+  "text.autoconfig.GreeterBro.option.returningPlayerConfig.cacheClearType": "Cache Reset Condition",
+  "text.autoconfig.GreeterBro.option.returningPlayerConfig.cacheClearType.@Tooltip": "Specifies the condition under which the player cache will be reset.",
   "text.autoconfig.GreeterBro.option.returningPlayerConfig.greetings": "Greetings",
   "text.autoconfig.GreeterBro.option.returningPlayerConfig.greetings.@Tooltip": "List of greetings to choose from.",
   "text.autoconfig.GreeterBro.category.blacklist": "Blacklist",
