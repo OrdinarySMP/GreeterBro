@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
+import me.shedaniel.autoconfig.annotation.ConfigEntry.Gui.EnumHandler.EnumDisplayOption;
 
 @Config(name = "returningPlayer")
 public class ReturningPlayerConfig implements ConfigData {
@@ -13,7 +14,9 @@ public class ReturningPlayerConfig implements ConfigData {
   @ConfigEntry.BoundedDiscrete(max = 10)
   public int ignoreForMin = 5;
 
-  @ConfigEntry.Gui.Tooltip public CacheClearType cacheClearType = CacheClearType.OnJoin;
+  @ConfigEntry.Gui.Tooltip
+  @ConfigEntry.Gui.EnumHandler(option = EnumDisplayOption.BUTTON)
+  public CacheClearType cacheClearType = CacheClearType.OnJoin;
 
   @ConfigEntry.Gui.Tooltip public List<String> greetings = List.of("Welcome back", "wb", "o/");
 
