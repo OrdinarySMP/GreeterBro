@@ -32,16 +32,20 @@ public class ChatMixin {
 
     List<String> greetingList;
     String player;
+    int chance;
 
     if (this.isFirstJoin(message)) {
       greetingList = config.firstJoinConfig.greetings;
       player = getPlayerName(message, config.firstJoinConfig.customMessage);
+      chance = config.firstJoinConfig.greetingChance;
     } else if (this.isNameChange(message)) {
       greetingList = config.nameChangeConfig.greetings;
       player = getPlayerName(message, config.nameChangeConfig.customMessage);
+      chance = config.nameChangeConfig.greetingChance;
     } else if (this.isJoinMessage(message)) {
       greetingList = config.generalConfig.greetings;
       player = getPlayerName(message, config.generalConfig.customMessage);
+      chance = config.generalConfig.greetingChance;
     } else {
       return;
     }
@@ -59,13 +63,14 @@ public class ChatMixin {
         if (joinCache.hasJoined(player)
             && !player.equals(MinecraftClient.getInstance().player.getName().getString())) {
           greetingList = config.returningPlayerConfig.greetings;
+          chance = config.returningPlayerConfig.greetingChance;
         }
       }
 
       joinCache.add(player);
     }
 
-    if (Math.random() > (double) config.generalConfig.greetingChance / 100) {
+    if (Math.random() > (double) chance / 100) {
       return;
     }
 

@@ -18,6 +18,9 @@ public class ReturningPlayerConfig implements ConfigData {
   @ConfigEntry.Gui.EnumHandler(option = EnumDisplayOption.BUTTON)
   public CacheClearType cacheClearType = CacheClearType.OnJoin;
 
+  @ConfigEntry.BoundedDiscrete(max = 100)
+  @ConfigEntry.Gui.Tooltip public int greetingChance = 100;
+
   @ConfigEntry.Gui.Tooltip public List<String> greetings = List.of("Welcome back", "wb", "o/");
 
   @Override
