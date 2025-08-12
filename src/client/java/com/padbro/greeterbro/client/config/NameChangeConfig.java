@@ -12,6 +12,9 @@ public class NameChangeConfig implements ConfigData {
 
   @ConfigEntry.Gui.Tooltip public String customMessage = "";
 
+  @ConfigEntry.BoundedDiscrete(max = 100)
+  @ConfigEntry.Gui.Tooltip public int greetingChance = 100;
+
   @ConfigEntry.Gui.Tooltip public List<String> greetings = List.of();
 
   @Override
