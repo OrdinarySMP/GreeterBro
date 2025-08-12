@@ -33,6 +33,7 @@ public class ChatMixin {
     List<String> greetingList;
     String player;
     int chance;
+    String currentPlayerName = MinecraftClient.getInstance().player.getName().getString();
 
     if (this.isFirstJoin(message)) {
       greetingList = config.firstJoinConfig.greetings;
@@ -52,6 +53,9 @@ public class ChatMixin {
 
     if (player != null) {
       if (config.blacklistConfig.players.contains(player)) {
+        return;
+      }
+      if (!config.generalConfig.enableOwnJoin && player.equals(currentPlayerName)) {
         return;
       }
 
