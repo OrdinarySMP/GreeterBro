@@ -54,6 +54,7 @@ public class ChatMixin {
       if (config.blacklistConfig.players.contains(player)) {
         return;
       }
+
       JoinCache joinCache = GreeterBroClient.getJoinCache();
 
       if (config.returningPlayerConfig.enable) {
@@ -74,6 +75,8 @@ public class ChatMixin {
       return;
     }
 
+    TickManager.cancelTaskByPlayerName(player);
+
     List<String> finalGreetingList = greetingList;
     TickManager.scheduleTask(
         new ScheduledTask(
@@ -86,7 +89,8 @@ public class ChatMixin {
               if (!greeting.isEmpty()) {
                 MinecraftClient.getInstance().player.networkHandler.sendChatMessage(greeting);
               }
-            }));
+            },
+            player));
   }
 
   @Unique
