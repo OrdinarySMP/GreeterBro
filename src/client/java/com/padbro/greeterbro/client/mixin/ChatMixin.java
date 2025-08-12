@@ -47,6 +47,10 @@ public class ChatMixin {
       greetingList = config.generalConfig.greetings;
       player = getPlayerName(message, config.generalConfig.customMessage);
       chance = config.generalConfig.greetingChance;
+    } else if (this.isLeaveMessage(message) && config.generalConfig.cancelOnLeave) {
+      player = getPlayerName(message, config.generalConfig.customLeaveMessage);
+      TickManager.cancelTaskByPlayerName(player);
+      return;
     } else {
       return;
     }
@@ -180,6 +184,13 @@ public class ChatMixin {
     }
 
     return hasKey;
+  }
+
+  @Unique
+  private boolean isLeaveMessage(Text message) {
+    String leaveMessageKey = "multiplayer.player.left";
+    return this.hasKey(message, leaveMessageKey)
+        || this.hasContent(message, GreeterBroClient.getConfig().generalConfig.customLeaveMessage);
   }
 
   @Unique

@@ -8,6 +8,11 @@
   "text.autoconfig.GreeterBro.option.generalConfig.customMessage.@Tooltip": "Custom join message sent by the server.\nRegex supported.\nThe first capture group will be used as the player name.",
   "text.autoconfig.GreeterBro.option.generalConfig.greetingChance": "Chance to greet a player",
   "text.autoconfig.GreeterBro.option.generalConfig.greetingChance.@Tooltip": "100 = greet always",
+
+  "text.autoconfig.GreeterBro.option.generalConfig.cancelOnLeave": "Cancel greeting on leave",
+  "text.autoconfig.GreeterBro.option.generalConfig.customLeaveMessage": "Custom leave message",
+  "text.autoconfig.GreeterBro.option.generalConfig.customLeaveMessage.@Tooltip": "Custom leave message sent by the server.\nRegex supported.\nThe first capture group will be used as the player name.",
+
   "text.autoconfig.GreeterBro.option.generalConfig.greetings": "Greetings",
   "text.autoconfig.GreeterBro.option.generalConfig.greetings.@Tooltip": "List of greetings to choose from.",
   "text.autoconfig.GreeterBro.option.generalConfig.delayRange": "Range of delay in ticks for the auto greeting",
