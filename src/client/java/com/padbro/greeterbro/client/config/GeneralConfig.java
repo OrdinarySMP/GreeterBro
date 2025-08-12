@@ -6,6 +6,8 @@ import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
 
+import javax.xml.transform.Source;
+
 @Config(name = "general")
 public class GeneralConfig implements ConfigData {
   @ConfigEntry.Gui.Tooltip public boolean enable = true;
@@ -26,18 +28,16 @@ public class GeneralConfig implements ConfigData {
   public void validatePostLoad() {
     int actualMin = Math.min(this.delayRange.min, this.delayRange.max);
     int actualMax = Math.max(this.delayRange.min, this.delayRange.max);
-    this.delayRange.min = actualMin;
-    this.delayRange.max = actualMax;
+    this.delayRange.min = Math.max(actualMin, 0);
+    this.delayRange.max = Math.max(actualMax, 0);
 
     this.greetings =
         greetings.stream().filter(s -> !s.trim().isEmpty()).collect(Collectors.toList());
   }
 
   public static class DelayRange {
-    @ConfigEntry.BoundedDiscrete(max = 100)
     int min;
 
-    @ConfigEntry.BoundedDiscrete(max = 100)
     int max;
 
     DelayRange(int min, int max) {
@@ -46,7 +46,11 @@ public class GeneralConfig implements ConfigData {
     }
 
     public int getRandomDelay() {
-      return (int) (Math.random() * (this.max - this.min + 1)) + this.min;
+      int actualMin = Math.min(this.min, this.max);
+      int actualMax = Math.max(this.min, this.max);
+      int min = Math.max(actualMin, 0);
+      int max = Math.max(actualMax, 0);
+      return (int) (Math.random() * (max - min + 1)) + min;
     }
   }
 }
