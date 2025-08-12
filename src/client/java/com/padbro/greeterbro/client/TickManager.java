@@ -2,12 +2,20 @@ package com.padbro.greeterbro.client;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
+import org.jetbrains.annotations.Nullable;
 
 public class TickManager {
   private static final List<ScheduledTask> tasks = new LinkedList<>();
 
   public static void scheduleTask(ScheduledTask task) {
     tasks.add(task);
+  }
+
+  public static void cancelTaskByPlayerName(@Nullable String playerName) {
+    if (playerName != null) {
+      tasks.removeIf(task -> Objects.equals(task.playerName, playerName));
+    }
   }
 
   public static void onTick() {
@@ -24,10 +32,12 @@ public class TickManager {
   public static class ScheduledTask {
     final Runnable task;
     int remainingTicks;
+    String playerName;
 
-    public ScheduledTask(int delayInTicks, Runnable task) {
+    public ScheduledTask(int delayInTicks, Runnable task, String playerName) {
       this.task = task;
       this.remainingTicks = delayInTicks;
+      this.playerName = playerName;
     }
 
     public void run() {

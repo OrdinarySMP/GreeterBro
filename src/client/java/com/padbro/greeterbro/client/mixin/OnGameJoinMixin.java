@@ -43,11 +43,11 @@ public class OnGameJoinMixin {
                 Random rand = new Random();
                 String greetingTemplate = greetingList.get(rand.nextInt(greetingList.size()));
                 String greeting = greetingTemplate.replaceAll("\\s*%player%", "");
-                  if (!greeting.isEmpty()) {
-                      player.networkHandler.sendChatMessage(greeting);
-                  }
-              }));
-
+                if (!greeting.isEmpty()) {
+                  player.networkHandler.sendChatMessage(greeting);
+                }
+              },
+              player.getName().getString()));
     }
   }
 }
