@@ -8,11 +8,9 @@
   "text.autoconfig.GreeterBro.option.generalConfig.customMessage.@Tooltip": "Custom join message sent by the server.\nRegex supported.\nThe first capture group will be used as the player name.",
   "text.autoconfig.GreeterBro.option.generalConfig.greetingChance": "Chance to greet a player",
   "text.autoconfig.GreeterBro.option.generalConfig.greetingChance.@Tooltip": "100 = greet always",
-
   "text.autoconfig.GreeterBro.option.generalConfig.cancelOnLeave": "Cancel greeting on leave",
   "text.autoconfig.GreeterBro.option.generalConfig.customLeaveMessage": "Custom leave message",
   "text.autoconfig.GreeterBro.option.generalConfig.customLeaveMessage.@Tooltip": "Custom leave message sent by the server.\nRegex supported.\nThe first capture group will be used as the player name.",
-
   "text.autoconfig.GreeterBro.option.generalConfig.greetings": "Greetings",
   "text.autoconfig.GreeterBro.option.generalConfig.greetings.@Tooltip": "List of greetings to choose from.",
   "text.autoconfig.GreeterBro.option.generalConfig.delayRange": "Range of delay in ticks for the auto greeting",
@@ -39,6 +37,8 @@
   "text.autoconfig.GreeterBro.option.nameChangeConfig.greetingChance.@Tooltip": "100 = greet always",
   "text.autoconfig.GreeterBro.category.returningPlayer": "Returning player",
   "text.autoconfig.GreeterBro.option.returningPlayerConfig.enable": "Enable",
+  "text.autoconfig.GreeterBro.option.returningPlayerConfig.cacheOnJoin": "Cache players on join",
+  "text.autoconfig.GreeterBro.option.returningPlayerConfig.cacheOnJoin.@Tooltip": "When you join, add all online players to the join cache.",
   "text.autoconfig.GreeterBro.option.returningPlayerConfig.ignoreForMin": "Ignore join for X minutes",
   "text.autoconfig.GreeterBro.option.returningPlayerConfig.cacheClearType": "Cache Reset Condition",
   "text.autoconfig.GreeterBro.option.returningPlayerConfig.cacheClearType.@Tooltip": "Specifies the condition under which the player cache will be reset.",
