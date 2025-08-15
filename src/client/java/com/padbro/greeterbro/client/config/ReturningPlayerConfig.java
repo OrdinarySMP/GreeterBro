@@ -11,6 +11,8 @@ import me.shedaniel.autoconfig.annotation.ConfigEntry.Gui.EnumHandler.EnumDispla
 public class ReturningPlayerConfig implements ConfigData {
   public boolean enable = true;
 
+  @ConfigEntry.Gui.Tooltip public boolean cacheOnJoin = true;
+
   @ConfigEntry.BoundedDiscrete(max = 10)
   public int ignoreForMin = 5;
 

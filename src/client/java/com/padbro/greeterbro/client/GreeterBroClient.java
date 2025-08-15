@@ -25,6 +25,7 @@ public class GreeterBroClient implements ClientModInitializer {
 
   private static ConfigHolder<GreeterBroConfig> config;
   private static JoinCache joinCache;
+  public static boolean isJoining = false;
   public static final String MOD_ID = "GreeterBro";
   public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 

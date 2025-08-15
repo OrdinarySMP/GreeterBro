@@ -19,6 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class OnGameJoinMixin {
   @Inject(at = @At("RETURN"), method = "onGameJoin")
   public void onReady(GameJoinS2CPacket packet, CallbackInfo ci) {
+    GreeterBroClient.isJoining = true;
     GreeterBroConfig config = GreeterBroClient.getConfig();
     JoinCache joinCache = GreeterBroClient.getJoinCache();
     if (!config.generalConfig.enable) {
