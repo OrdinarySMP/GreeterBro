@@ -21,7 +21,7 @@ public class OnPlayerListMixin {
       JoinCache joinCache = GreeterBroClient.getJoinCache();
       for (PlayerListS2CPacket.Entry entry : players) {
         if (entry.profile() != null) {
-          joinCache.add(entry.profile().getName());
+          joinCache.add(entry.profile().name());
         }
       }
       GreeterBroClient.isJoining = false;
