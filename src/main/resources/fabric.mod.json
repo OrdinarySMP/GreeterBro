@@ -12,9 +12,6 @@
   "icon": "assets/greeterbro/icon.png",
   "environment": "client",
   "entrypoints": {
-    "fabric-datagen": [
-      "com.padbro.greeterbro.client.GreeterBroDataGenerator"
-    ],
     "client": [
       "com.padbro.greeterbro.client.GreeterBroClient"
     ],
