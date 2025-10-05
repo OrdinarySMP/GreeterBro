@@ -57,5 +57,9 @@
   "text.command.GreeterBro.blacklist.add.success": "The player \"%1$s\" has been added to the blacklist.",
   "text.command.GreeterBro.blacklist.get.success": "You have %1$s players blacklisted:\n %2$s.",
   "text.command.GreeterBro.blacklist.remove.error.exists": "The player is not in the blacklist.",
-  "text.command.GreeterBro.blacklist.remove.success": "The player \"%1$s\" has been removed from the blacklist."
+  "text.command.GreeterBro.blacklist.remove.success": "The player \"%1$s\" has been removed from the blacklist.",
+  "text.command.GreeterBro.enable.error.enabled": "GreeterBro is already enabled.",
+  "text.command.GreeterBro.enable.success": "GreeterBro enabled.",
+  "text.command.GreeterBro.disable.error.disabled": "GreeterBro is already disabled.",
+  "text.command.GreeterBro.disable.success": "GreeterBro disabled."
 }

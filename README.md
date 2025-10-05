@@ -29,11 +29,13 @@ All options are available in-game via the **Mod Menu** UI (requires the [Mod Men
 
 Greeter Bro includes a few in-game commands to help you manage greetings directly from within Minecraft.
 
-| Command                                  | Description                                               |
-|------------------------------------------|-----------------------------------------------------------|
-| `/greeterbro blacklist`                  | Lists all players currently on the blacklist.             |
-| `/greeterbro blacklist add <player>`     | Adds a player to the blacklist to prevent greetings.      |
-| `/greeterbro blacklist remove <player>`  | Removes a player from the blacklist.                      |
+| Command                                 | Description                                          |
+|-----------------------------------------|------------------------------------------------------|
+| `/greeterbro blacklist`                 | Lists all players currently on the blacklist.        |
+| `/greeterbro blacklist add <player>`    | Adds a player to the blacklist to prevent greetings. |
+| `/greeterbro blacklist remove <player>` | Removes a player from the blacklist.                 |
+| `/greeterbro enable`                    | Enables GreeterBro.                                  |
+| `/greeterbro disable`                   | Disables GreeterBro.                                 |
 
 ---
 
