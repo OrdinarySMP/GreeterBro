@@ -1,5 +1,6 @@
 package com.padbro.greeterbro.client.mixin;
 
+import com.padbro.greeterbro.client.AfkManager;
 import com.padbro.greeterbro.client.GreeterBroClient;
 import com.padbro.greeterbro.client.JoinCache;
 import com.padbro.greeterbro.client.TickManager;
@@ -27,7 +28,10 @@ public class ChatMixin {
   @Inject(method = "onGameMessage", at = @At("HEAD"))
   public void onMessage(Text message, boolean overlay, CallbackInfo ci) {
     GreeterBroConfig config = GreeterBroClient.getConfig();
-    if (!config.generalConfig.enable || MinecraftClient.getInstance().player == null) {
+    if (!config.generalConfig.enable
+        || MinecraftClient.getInstance().player == null
+        || (config.afkConfig.enable && AfkManager.isAfk)) {
+
       return;
     }
 

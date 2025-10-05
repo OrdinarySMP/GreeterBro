@@ -10,6 +10,10 @@ public class GreeterBroConfig extends PartitioningSerializer.GlobalData {
   @ConfigEntry.Gui.TransitiveObject
   public GeneralConfig generalConfig = new GeneralConfig();
 
+  @ConfigEntry.Category("afk")
+  @ConfigEntry.Gui.TransitiveObject
+  public AfkConfig afkConfig = new AfkConfig();
+
   @ConfigEntry.Category("returningPlayer")
   @ConfigEntry.Gui.TransitiveObject
   public ReturningPlayerConfig returningPlayerConfig = new ReturningPlayerConfig();
