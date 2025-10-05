@@ -4,6 +4,7 @@
   "package": "com.padbro.greeterbro.client.mixin",
   "compatibilityLevel": "JAVA_21",
   "client": [
+    "OnChatSendMixin",
     "OnGameJoinMixin",
     "OnPlayerListMixin"
   ],

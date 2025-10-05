@@ -23,6 +23,7 @@ public class CommandManager {
     BlacklistCommand.register(commandRoot);
     EnableCommand.register(commandRoot);
     DisableCommand.register(commandRoot);
+    AfkCommand.register(commandRoot);
 
     dispatcher.register(commandRoot);
   }

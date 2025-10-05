@@ -40,6 +40,7 @@ public class GreeterBroClient implements ClientModInitializer {
     ClientTickEvents.END_CLIENT_TICK.register(
         client -> {
           TickManager.onTick();
+          AfkManager.onTick();
         });
 
     CommandManager.register();

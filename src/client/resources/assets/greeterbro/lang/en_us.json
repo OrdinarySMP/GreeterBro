@@ -19,6 +19,16 @@
   "text.autoconfig.GreeterBro.option.generalConfig.customFirstJoinMessage": "Custom first join message",
   "text.autoconfig.GreeterBro.option.generalConfig.customFirstJoinMessage.joinMessage": "Custom join message",
   "text.autoconfig.GreeterBro.option.generalConfig.customFirstJoinMessage.greeting": "Greeting",
+  "text.autoconfig.GreeterBro.category.afk": "AFK",
+  "text.autoconfig.GreeterBro.option.afkConfig.enable": "Enable",
+  "text.autoconfig.GreeterBro.option.afkConfig.enable.@Tooltip": "Enable AFK detection.",
+  "text.autoconfig.GreeterBro.option.afkConfig.afkTime": "AFK timeout",
+  "text.autoconfig.GreeterBro.option.afkConfig.afkTime.@Tooltip": "Time (in minutes) of inactivity before entering AFK mode.",
+  "text.autoconfig.GreeterBro.option.afkConfig.notifyType": "AFK Notification Type",
+  "text.autoconfig.GreeterBro.option.afkConfig.notifyType.@Tooltip": "Choose how to be notified when entering or leaving AFK mode.",
+  "text.autoconfig.GreeterBro.option.afkConfig.afkNotifyType.disabled": "Disabled",
+  "text.autoconfig.GreeterBro.option.afkConfig.afkNotifyType.chat": "Chat",
+  "text.autoconfig.GreeterBro.option.afkConfig.afkNotifyType.overlay": "Overlay",
   "text.autoconfig.GreeterBro.category.firstJoin": "First join",
   "text.autoconfig.GreeterBro.option.firstJoinConfig.enable": "Enable",
   "text.autoconfig.GreeterBro.option.firstJoinConfig.customMessage": "Custom first join message",
@@ -61,5 +71,8 @@
   "text.command.GreeterBro.enable.error.enabled": "GreeterBro is already enabled.",
   "text.command.GreeterBro.enable.success": "GreeterBro enabled.",
   "text.command.GreeterBro.disable.error.disabled": "GreeterBro is already disabled.",
-  "text.command.GreeterBro.disable.success": "GreeterBro disabled."
+  "text.command.GreeterBro.disable.success": "GreeterBro disabled.",
+  "text.command.GreeterBro.afk.error.isAfk": "You are already AFK.",
+  "text.message.GreeterBro.afk.enter_afk": "Entering AFK mode. Greetings disabled.",
+  "text.message.GreeterBro.afk.leave_afk": "Exiting AFK mode. Greetings enabled."
 }

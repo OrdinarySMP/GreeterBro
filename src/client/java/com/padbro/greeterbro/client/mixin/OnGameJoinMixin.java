@@ -1,5 +1,6 @@
 package com.padbro.greeterbro.client.mixin;
 
+import com.padbro.greeterbro.client.AfkManager;
 import com.padbro.greeterbro.client.GreeterBroClient;
 import com.padbro.greeterbro.client.JoinCache;
 import com.padbro.greeterbro.client.TickManager;
@@ -24,6 +25,11 @@ public class OnGameJoinMixin {
     JoinCache joinCache = GreeterBroClient.getJoinCache();
     if (!config.generalConfig.enable) {
       return;
+    }
+
+    if (config.afkConfig.enable) {
+      AfkManager.isAfk = false;
+      AfkManager.setLastActiveNow(false);
     }
 
     if (joinCache.shouldClearOnJoin()) {
