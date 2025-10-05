@@ -15,7 +15,7 @@ It supports servers with [**Styled Chat**](https://modrinth.com/mod/styled-chat)
 - **Player Blacklist** – Prevent specific players from being greeted.
 - **Randomized Delay** – Greetings are sent after a random delay within a configurable time range.
 - **%player% Placeholder Support** – Insert the joining player’s name into greetings.
-
+- **AFK Mode** – Automatically disables greetings if you are AFK.
 
 ---
 
@@ -31,6 +31,7 @@ Greeter Bro includes a few in-game commands to help you manage greetings directl
 
 | Command                                 | Description                                          |
 |-----------------------------------------|------------------------------------------------------|
+| `/greeterbro afk`                       | Enters AFK mode.                                     |
 | `/greeterbro blacklist`                 | Lists all players currently on the blacklist.        |
 | `/greeterbro blacklist add <player>`    | Adds a player to the blacklist to prevent greetings. |
 | `/greeterbro blacklist remove <player>` | Removes a player from the blacklist.                 |
