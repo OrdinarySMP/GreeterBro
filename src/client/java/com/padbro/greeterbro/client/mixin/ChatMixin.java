@@ -10,6 +10,7 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.regex.Pattern;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.network.message.MessageHandler;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableTextContent;
@@ -90,12 +91,16 @@ public class ChatMixin {
         new ScheduledTask(
             config.generalConfig.delayRange.getRandomDelay(),
             () -> {
+              ClientPlayerEntity currentPlayer = MinecraftClient.getInstance().player;
+              if (currentPlayer == null) {
+                return;
+              }
               Random rand = new Random();
               String greetingTemplate =
                   finalGreetingList.get(rand.nextInt(finalGreetingList.size()));
               String greeting = greetingTemplate.replace("%player%", player != null ? player : "");
               if (!greeting.isEmpty()) {
-                MinecraftClient.getInstance().player.networkHandler.sendChatMessage(greeting);
+                currentPlayer.networkHandler.sendChatMessage(greeting);
               }
             },
             player));
