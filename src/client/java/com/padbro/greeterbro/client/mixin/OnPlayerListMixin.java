@@ -15,16 +15,22 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class OnPlayerListMixin {
   @Inject(method = "onPlayerList", at = @At("TAIL"))
   private void onPlayerList(PlayerListS2CPacket packet, CallbackInfo ci) {
-    GreeterBroConfig config = GreeterBroClient.getConfig();
-    if (GreeterBroClient.isJoining && config.returningPlayerConfig.cacheOnJoin) {
-      List<PlayerListS2CPacket.Entry> players = packet.getPlayerAdditionEntries();
-      JoinCache joinCache = GreeterBroClient.getJoinCache();
-      for (PlayerListS2CPacket.Entry entry : players) {
-        if (entry.profile() != null) {
-          joinCache.add(entry.profile().name());
-        }
-      }
-      GreeterBroClient.isJoining = false;
+    if (!GreeterBroClient.isJoining) {
+      return;
     }
+
+    GreeterBroConfig config = GreeterBroClient.getConfig();
+    if (!config.returningPlayerConfig.cacheOnJoin) {
+      return;
+    }
+
+    List<PlayerListS2CPacket.Entry> players = packet.getPlayerAdditionEntries();
+    JoinCache joinCache = GreeterBroClient.getJoinCache();
+    for (PlayerListS2CPacket.Entry entry : players) {
+      if (entry.profile() != null) {
+        joinCache.add(entry.profile().name());
+      }
+    }
+    GreeterBroClient.isJoining = false;
   }
 }

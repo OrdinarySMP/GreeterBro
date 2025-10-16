@@ -26,6 +26,10 @@ public class GreeterBroConfig extends PartitioningSerializer.GlobalData {
   @ConfigEntry.Gui.TransitiveObject
   public NameChangeConfig nameChangeConfig = new NameChangeConfig();
 
+  @ConfigEntry.Category("specialGreetings")
+  @ConfigEntry.Gui.TransitiveObject
+  public SpecialGreetingsConfig specialGreetings = new SpecialGreetingsConfig();
+
   @ConfigEntry.Category("blacklist")
   @ConfigEntry.Gui.TransitiveObject
   public BlacklistConfig blacklistConfig = new BlacklistConfig();

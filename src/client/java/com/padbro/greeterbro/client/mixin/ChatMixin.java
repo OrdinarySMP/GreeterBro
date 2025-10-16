@@ -6,8 +6,10 @@ import com.padbro.greeterbro.client.JoinCache;
 import com.padbro.greeterbro.client.TickManager;
 import com.padbro.greeterbro.client.TickManager.ScheduledTask;
 import com.padbro.greeterbro.client.config.GreeterBroConfig;
+import com.padbro.greeterbro.client.config.SpecialGreetingsConfig.SpecialGreeting;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Random;
 import java.util.regex.Pattern;
 import net.minecraft.client.MinecraftClient;
@@ -64,8 +66,15 @@ public class ChatMixin {
       if (config.blacklistConfig.players.contains(player)) {
         return;
       }
+
       if (!config.generalConfig.enableOwnJoin && player.equals(currentPlayerName)) {
         return;
+      }
+
+      Optional<SpecialGreeting> specialGreeting = config.specialGreetings.getForPlayer(player);
+      if (specialGreeting.isPresent()) {
+        greetingList = specialGreeting.get().greetings;
+        chance = specialGreeting.get().greetingChance;
       }
 
       JoinCache joinCache = GreeterBroClient.getJoinCache();
@@ -74,10 +83,14 @@ public class ChatMixin {
         if (joinCache.hasRecentlyJoined(player)) {
           return;
         }
-        if (joinCache.hasJoined(player)
-            && !player.equals(MinecraftClient.getInstance().player.getName().getString())) {
-          greetingList = config.returningPlayerConfig.greetings;
-          chance = config.returningPlayerConfig.greetingChance;
+        if (joinCache.hasJoined(player) && !player.equals(currentPlayerName)) {
+          if (specialGreeting.isPresent()) {
+            greetingList = specialGreeting.get().returningGreetings;
+            chance = specialGreeting.get().greetingChance;
+          } else {
+            greetingList = config.returningPlayerConfig.greetings;
+            chance = config.returningPlayerConfig.greetingChance;
+          }
         }
       }
 
