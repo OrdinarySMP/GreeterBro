@@ -47,11 +47,15 @@ public class OnGameJoinMixin {
           new TickManager.ScheduledTask(
               config.generalConfig.delayRange.getRandomDelay(),
               () -> {
+                ClientPlayerEntity currentPlayer = MinecraftClient.getInstance().player;
+                if (currentPlayer == null) {
+                  return;
+                }
                 Random rand = new Random();
                 String greetingTemplate = greetingList.get(rand.nextInt(greetingList.size()));
                 String greeting = greetingTemplate.replaceAll("\\s*%player%", "");
                 if (!greeting.isEmpty()) {
-                  player.networkHandler.sendChatMessage(greeting);
+                  currentPlayer.networkHandler.sendChatMessage(greeting);
                 }
               },
               player.getName().getString()));
