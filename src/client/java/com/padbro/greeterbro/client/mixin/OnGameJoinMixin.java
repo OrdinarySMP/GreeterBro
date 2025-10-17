@@ -1,9 +1,9 @@
 package com.padbro.greeterbro.client.mixin;
 
-import com.padbro.greeterbro.client.AfkManager;
+import com.padbro.greeterbro.client.managers.AfkManager;
 import com.padbro.greeterbro.client.GreeterBroClient;
 import com.padbro.greeterbro.client.JoinCache;
-import com.padbro.greeterbro.client.TickManager;
+import com.padbro.greeterbro.client.managers.TickManager;
 import com.padbro.greeterbro.client.config.GreeterBroConfig;
 import java.util.List;
 import java.util.Random;
@@ -45,7 +45,7 @@ public class OnGameJoinMixin {
       }
       TickManager.scheduleTask(
           new TickManager.ScheduledTask(
-              config.generalConfig.delayRange.getRandomDelay(),
+              config.generalConfig.delayRange.getRandomDelayInTicks(),
               () -> {
                 ClientPlayerEntity currentPlayer = MinecraftClient.getInstance().player;
                 if (currentPlayer == null) {

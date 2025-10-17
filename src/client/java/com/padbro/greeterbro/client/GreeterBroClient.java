@@ -2,6 +2,9 @@ package com.padbro.greeterbro.client;
 
 import com.padbro.greeterbro.client.commands.CommandManager;
 import com.padbro.greeterbro.client.config.GreeterBroConfig;
+import com.padbro.greeterbro.client.managers.AfkManager;
+import com.padbro.greeterbro.client.managers.MigrationManager;
+import com.padbro.greeterbro.client.managers.TickManager;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.ConfigHolder;
 import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
@@ -34,6 +37,7 @@ public class GreeterBroClient implements ClientModInitializer {
   @Override
   public void onInitializeClient() {
     config = AutoConfig.register(GreeterBroConfig.class, Toml4jConfigSerializer::new);
+    MigrationManager.migrate();
 
     joinCache = JoinCache.loadCache();
 

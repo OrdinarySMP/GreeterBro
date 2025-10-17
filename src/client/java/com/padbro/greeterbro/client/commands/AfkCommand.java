@@ -4,7 +4,7 @@ import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.lit
 
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
-import com.padbro.greeterbro.client.AfkManager;
+import com.padbro.greeterbro.client.managers.AfkManager;
 import com.padbro.greeterbro.client.GreeterBroClient;
 import com.padbro.greeterbro.client.config.AfkNotifyType;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;

@@ -1,10 +1,10 @@
 package com.padbro.greeterbro.client.mixin;
 
-import com.padbro.greeterbro.client.AfkManager;
+import com.padbro.greeterbro.client.managers.AfkManager;
 import com.padbro.greeterbro.client.GreeterBroClient;
 import com.padbro.greeterbro.client.JoinCache;
-import com.padbro.greeterbro.client.TickManager;
-import com.padbro.greeterbro.client.TickManager.ScheduledTask;
+import com.padbro.greeterbro.client.managers.TickManager;
+import com.padbro.greeterbro.client.managers.TickManager.ScheduledTask;
 import com.padbro.greeterbro.client.config.GreeterBroConfig;
 import com.padbro.greeterbro.client.config.SpecialGreetingsConfig.SpecialGreeting;
 import java.util.List;
@@ -106,7 +106,7 @@ public class ChatMixin {
     List<String> finalGreetingList = greetingList;
     TickManager.scheduleTask(
         new ScheduledTask(
-            config.generalConfig.delayRange.getRandomDelay(),
+            config.generalConfig.delayRange.getRandomDelayInTicks(),
             () -> {
               ClientPlayerEntity currentPlayer = MinecraftClient.getInstance().player;
               if (currentPlayer == null) {

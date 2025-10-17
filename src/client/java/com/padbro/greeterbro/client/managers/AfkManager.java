@@ -1,5 +1,6 @@
-package com.padbro.greeterbro.client;
+package com.padbro.greeterbro.client.managers;
 
+import com.padbro.greeterbro.client.GreeterBroClient;
 import com.padbro.greeterbro.client.config.AfkConfig;
 import com.padbro.greeterbro.client.config.AfkNotifyType;
 import com.padbro.greeterbro.client.config.GeneralConfig;
@@ -11,7 +12,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
-import org.jetbrains.annotations.Nullable;
 
 public class AfkManager {
   private static final MinecraftClient minecraftInstance = MinecraftClient.getInstance();

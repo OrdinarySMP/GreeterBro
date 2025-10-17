@@ -1,6 +1,6 @@
 package com.padbro.greeterbro.client.mixin;
 
-import com.padbro.greeterbro.client.AfkManager;
+import com.padbro.greeterbro.client.managers.AfkManager;
 import com.padbro.greeterbro.client.GreeterBroClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import org.spongepowered.asm.mixin.Mixin;
