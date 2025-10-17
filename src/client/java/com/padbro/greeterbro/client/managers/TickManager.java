@@ -1,4 +1,4 @@
-package com.padbro.greeterbro.client;
+package com.padbro.greeterbro.client.managers;
 
 import java.util.LinkedList;
 import java.util.List;
