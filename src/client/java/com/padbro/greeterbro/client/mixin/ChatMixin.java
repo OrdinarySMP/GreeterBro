@@ -30,9 +30,9 @@ public class ChatMixin {
   @Inject(method = "onGameMessage", at = @At("HEAD"))
   public void onMessage(Text message, boolean overlay, CallbackInfo ci) {
     GreeterBroConfig config = GreeterBroClient.getConfig();
-    if (!config.generalConfig.enable
+    if (!config.generalConfig.getEnabled()
         || MinecraftClient.getInstance().player == null
-        || (config.afkConfig.enable && AfkManager.isAfk)) {
+        || (config.afkConfig.getEnabled() && AfkManager.isAfk)) {
 
       return;
     }
@@ -45,15 +45,15 @@ public class ChatMixin {
     if (this.isFirstJoin(message)) {
       greetingList = config.firstJoinConfig.greetings;
       player = getPlayerName(message, config.firstJoinConfig.customMessage);
-      chance = config.firstJoinConfig.greetingChance;
+      chance = config.firstJoinConfig.getGreetingChance();
     } else if (this.isNameChange(message)) {
       greetingList = config.nameChangeConfig.greetings;
       player = getPlayerName(message, config.nameChangeConfig.customMessage);
-      chance = config.nameChangeConfig.greetingChance;
+      chance = config.nameChangeConfig.getGreetingChance();
     } else if (this.isJoinMessage(message)) {
       greetingList = config.generalConfig.greetings;
       player = getPlayerName(message, config.generalConfig.customMessage);
-      chance = config.generalConfig.greetingChance;
+      chance = config.generalConfig.getGreetingChance();
     } else if (this.isLeaveMessage(message) && config.generalConfig.cancelOnLeave) {
       player = getPlayerName(message, config.generalConfig.customLeaveMessage);
       TickManager.cancelTaskByPlayerName(player);
@@ -63,7 +63,7 @@ public class ChatMixin {
     }
 
     if (player != null) {
-      if (config.blacklistConfig.players.contains(player)) {
+      if (config.blacklistConfig.getAllPlayers().contains(player)) {
         return;
       }
 
@@ -89,7 +89,7 @@ public class ChatMixin {
             chance = specialGreeting.get().greetingChance;
           } else {
             greetingList = config.returningPlayerConfig.greetings;
-            chance = config.returningPlayerConfig.greetingChance;
+            chance = config.returningPlayerConfig.getGreetingChance();
           }
         }
       }

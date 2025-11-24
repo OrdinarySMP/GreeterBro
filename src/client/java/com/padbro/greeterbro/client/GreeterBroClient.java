@@ -5,48 +5,58 @@ import com.padbro.greeterbro.client.config.GreeterBroConfig;
 import com.padbro.greeterbro.client.managers.AfkManager;
 import com.padbro.greeterbro.client.managers.MigrationManager;
 import com.padbro.greeterbro.client.managers.TickManager;
+import com.padbro.greeterbro.config.GreeterBroServerConfig;
+import com.padbro.greeterbro.records.ConfigS2CPayload;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.ConfigHolder;
 import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 
 public class GreeterBroClient implements ClientModInitializer {
+    public static boolean isJoining = false;
+    public static GreeterBroServerConfig serverConfig;
+    private static ConfigHolder<GreeterBroConfig> config;
+    private static JoinCache joinCache;
 
-  private static ConfigHolder<GreeterBroConfig> config;
-  private static JoinCache joinCache;
-  public static boolean isJoining = false;
-  public static final String MOD_ID = "GreeterBro";
-  public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+    public static GreeterBroConfig getConfig() {
+        config.save();
+        return config.get();
+    }
 
-  public static GreeterBroConfig getConfig() {
-    config.save();
-    return config.get();
-  }
+    public static JoinCache getJoinCache() {
+        return joinCache;
+    }
 
-  public static JoinCache getJoinCache() {
-    return joinCache;
-  }
+    public static void saveConfig() {
+        config.save();
+    }
 
-  public static void saveConfig() {
-    config.save();
-  }
+    @Override
+    public void onInitializeClient() {
+        config = AutoConfig.register(GreeterBroConfig.class, Toml4jConfigSerializer::new);
+        MigrationManager.migrate();
 
-  @Override
-  public void onInitializeClient() {
-    config = AutoConfig.register(GreeterBroConfig.class, Toml4jConfigSerializer::new);
-    MigrationManager.migrate();
+        joinCache = JoinCache.loadCache();
 
-    joinCache = JoinCache.loadCache();
+        ClientTickEvents.END_CLIENT_TICK.register(
+                client -> {
+                    TickManager.onTick();
+                    AfkManager.onTick();
+                });
 
-    ClientTickEvents.END_CLIENT_TICK.register(
-        client -> {
-          TickManager.onTick();
-          AfkManager.onTick();
+        ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> {
+            serverConfig = null;
         });
 
-    CommandManager.register();
-  }
+        CommandManager.register();
+
+        ClientPlayNetworking.registerGlobalReceiver(
+                ConfigS2CPayload.ID,
+                (payload, context) -> {
+                    serverConfig = payload.config();
+                });
+    }
 }

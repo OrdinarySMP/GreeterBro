@@ -10,7 +10,7 @@
   "contact": {},
   "license": "All-Rights-Reserved",
   "icon": "assets/greeterbro/icon.png",
-  "environment": "client",
+  "environment": "*",
   "entrypoints": {
     "client": [
       "com.padbro.greeterbro.client.GreeterBroClient"

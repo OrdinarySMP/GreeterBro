@@ -15,7 +15,7 @@ public class BlacklistSuggestionProvider implements SuggestionProvider<FabricCli
       CommandContext<FabricClientCommandSource> context, SuggestionsBuilder builder) {
     String partialQuery = builder.getRemainingLowerCase();
 
-    for (String player : GreeterBroClient.getConfig().blacklistConfig.players) {
+    for (String player : GreeterBroClient.getConfig().blacklistConfig.getPlayers()) {
       if (player.toLowerCase().startsWith(partialQuery)) {
         builder.suggest(player);
       }

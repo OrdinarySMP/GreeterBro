@@ -1,30 +1,30 @@
 package com.padbro.greeterbro.client.commands;
 
-import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.literal;
-
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.minecraft.command.CommandRegistryAccess;
 
+import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.literal;
+
 public class CommandManager {
-  private static final LiteralArgumentBuilder<FabricClientCommandSource> commandRoot =
-      literal("greeterBro");
+    private static final LiteralArgumentBuilder<FabricClientCommandSource> commandRoot =
+            literal("greeterBro");
 
-  public static void register() {
-    ClientCommandRegistrationCallback.EVENT.register(CommandManager::registerGreeterBro);
-  }
+    public static void register() {
+        ClientCommandRegistrationCallback.EVENT.register(CommandManager::registerGreeterBro);
+    }
 
-  private static void registerGreeterBro(
-      CommandDispatcher<FabricClientCommandSource> dispatcher,
-      CommandRegistryAccess registryAccess) {
+    private static void registerGreeterBro(
+            CommandDispatcher<FabricClientCommandSource> dispatcher,
+            CommandRegistryAccess registryAccess) {
 
-    BlacklistCommand.register(commandRoot);
-    EnableCommand.register(commandRoot);
-    DisableCommand.register(commandRoot);
-    AfkCommand.register(commandRoot);
+        BlacklistCommand.register(commandRoot);
+        EnableCommand.register(commandRoot);
+        DisableCommand.register(commandRoot);
+        AfkCommand.register(commandRoot);
 
-    dispatcher.register(commandRoot);
-  }
+        dispatcher.register(commandRoot);
+    }
 }

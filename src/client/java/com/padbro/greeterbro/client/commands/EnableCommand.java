@@ -19,12 +19,17 @@ public class EnableCommand {
     GreeterBroConfig config = GreeterBroClient.getConfig();
     FabricClientCommandSource source = context.getSource();
 
-    if (config.generalConfig.enable) {
+      if (GreeterBroClient.serverConfig != null && GreeterBroClient.serverConfig.generalConfig.enabled == false) {
+          source.sendError(Text.translatable("text.command.GreeterBro.enable.error.server.disabled"));
+          return 0;
+      }
+
+    if (config.generalConfig.getEnabled()) {
       source.sendError(Text.translatable("text.command.GreeterBro.enable.error.enabled"));
       return 0;
     }
 
-    config.generalConfig.enable = true;
+    config.generalConfig.setEnabled(true);
     GreeterBroClient.saveConfig();
     source.sendFeedback(
         Text.translatable("text.command.GreeterBro.enable.success").formatted(Formatting.GRAY));
