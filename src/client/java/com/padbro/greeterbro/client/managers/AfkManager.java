@@ -23,7 +23,7 @@ public class AfkManager {
   private static Instant lastActiveAt = Instant.now();
 
   public static void onTick() {
-    if (!config.enable || !afkConfig.enable) {
+    if (!config.getEnabled() || !afkConfig.getEnabled()) {
       return;
     }
 
@@ -37,7 +37,7 @@ public class AfkManager {
     }
 
     boolean isBefore =
-        lastActiveAt.isBefore(Instant.now().minus(afkConfig.afkTime, ChronoUnit.MINUTES));
+        lastActiveAt.isBefore(Instant.now().minus(afkConfig.getAfkTime(), ChronoUnit.MINUTES));
 
     if (isBefore) {
       goAfk();

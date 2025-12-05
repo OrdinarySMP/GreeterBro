@@ -23,7 +23,7 @@ public class OnChatSendMixin {
 
   @Unique
   private void onMessageSend(String content, CallbackInfo ci) {
-    if (GreeterBroClient.getConfig().afkConfig.enable) {
+    if (GreeterBroClient.getConfig().afkConfig.getEnabled()) {
       AfkManager.setLastActiveNow(true);
     }
   }
