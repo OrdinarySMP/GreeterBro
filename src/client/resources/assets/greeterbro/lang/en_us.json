@@ -60,7 +60,6 @@
   "text.autoconfig.GreeterBro.option.returningPlayerConfig.cacheClearType.never": "Never",
   "text.autoconfig.GreeterBro.option.returningPlayerConfig.greetings": "Greetings",
   "text.autoconfig.GreeterBro.option.returningPlayerConfig.greetings.@Tooltip": "List of greetings to choose from.",
-
   "text.autoconfig.GreeterBro.category.specialGreetings": "Special Greetings",
   "text.autoconfig.GreeterBro.option.specialGreetings.specialGreetings": "List of special greetings",
   "text.autoconfig.GreeterBro.option.specialGreetings.specialGreetings.@Tooltip": "The list of all special greetings for specific players.",
@@ -73,7 +72,6 @@
   "text.autoconfig.GreeterBro.option.SpecialGreeting.greetings.@Tooltip": "List of greetings to choose from.",
   "text.autoconfig.GreeterBro.option.SpecialGreeting.returningGreetings": "Returning greetings",
   "text.autoconfig.GreeterBro.option.SpecialGreeting.returningGreetings.@Tooltip": "List of greetings to use when the player returns.\nRequires the \"Returning player\" config to be enabled.",
-
   "text.autoconfig.GreeterBro.category.blacklist": "Blacklist",
   "text.autoconfig.GreeterBro.option.blacklistConfig.players": "Players",
   "text.autoconfig.GreeterBro.title": "GreeterBro",
