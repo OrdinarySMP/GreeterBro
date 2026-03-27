@@ -68,9 +68,11 @@ public class AfkManager {
         }
         LocalPlayer player = minecraftInstance.player;
         if (player != null) {
-            ChatFormatting format =
-                    afkConfig.notifyType == AfkNotifyType.Overlay ? ChatFormatting.YELLOW : ChatFormatting.GRAY;
-            player.displayClientMessage(message.withStyle(format), afkConfig.notifyType == AfkNotifyType.Overlay);
+            if (afkConfig.notifyType == AfkNotifyType.Overlay) {
+                player.sendOverlayMessage(message.withStyle(ChatFormatting.YELLOW));
+            } else {
+                player.sendSystemMessage(message.withStyle(ChatFormatting.GRAY));
+            }
         }
     }
 
